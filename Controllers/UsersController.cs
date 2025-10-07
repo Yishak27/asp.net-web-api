@@ -13,9 +13,23 @@ namespace FirstApi.Controllers
             new User(){userId = 1, age= 24, fullName = "Ermiyas", isActive = true}
         };
         [HttpGet]
-        public IEnumerable<User> GetUsers()
+        public IActionResult GetUsers()
         {
-            return user;
+            try
+            {
+                return Ok( new {
+                    status = StatusCodes.Status200OK,
+                    message = "Successfully created",
+                });
+            }
+            catch (System.Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, new
+                {
+                    status = "faield",
+                    message = "Internal server errror"
+                });                
+            }
         }
     }
 }
